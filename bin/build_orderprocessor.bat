@@ -1,0 +1,1 @@
+ mvn --settings c:/Users/krogrannet/.m2/settingsLocal.xml -Dmaven.test.skip=true clean package

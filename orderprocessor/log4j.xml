@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "file:/log4j.dtd">
+
+<!--
+ $Id$
+ $DateTime$
+ $Author$
+-->
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                              						   -->
+<!-- For more configuration information and examples see the 			   -->
+<!-- Jakarta Log4j website: http://jakarta.apache.org/log4j				   -->
+<!-- ===================================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+   <!-- ================================= -->
+   <!-- Preserve messages in a local file -->
+   <!-- ================================= -->
+
+
+   <!-- A time/date based rolling appender -->
+   <appender name="FILE" class="org.apache.log4j.rolling.RollingFileAppender">
+      <param name="File" value="./orderprocessor.log"/>
+      <param name="Append" value="true"/>
+      
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Logger] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+      </layout>
+      
+      <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+      	<param name="FileNamePattern" value="./logs/orderprocessor.%d{yyyy-MM-dd}.log.zip" />
+      </rollingPolicy>
+   </appender>
+
+
+   <!-- ============================== -->
+   <!-- Append messages to the console -->
+   <!-- ============================== -->
+
+   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+      <param name="Target" value="System.out"/>
+
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Logger] Message\n -->
+         <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+      </layout>
+   </appender>
+
+
+   <logger name="se.pensionsmyndigheten.icc.test.orderprocessor.Application">
+            <level value="DEBUG"/>
+   </logger>
+   	
+
+
+   <!-- ======================= -->
+   <!-- Setup the Root logger   -->
+   <!-- ======================= -->
+
+  <root>
+      <level class="org.apache.log4j.Level" value="INFO"/>
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="FILE"/>
+   </root>
+
+</log4j:configuration>
