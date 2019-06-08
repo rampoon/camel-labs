@@ -12,6 +12,7 @@ import org.apache.camel.model.RouteDefinition;
 import org.apache.log4j.Logger;
 
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route;
+import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route2;
 
 public class Application {
 
@@ -35,12 +36,10 @@ public class Application {
         	LOG.debug("camelContext.getName()=" + camelContext.getName());
         }
 
-        camel.addRouteBuilder(new Route());
-        List<RouteDefinition> routeDefinitionList = camel.getRouteDefinitions();
-        List<RouteBuilder> routeBuilderList = camel.getRouteBuilders();
-        routeDefinitionList.forEach(routeDefinition->System.out.println("routeDefinition=" + routeDefinition));
-        routeBuilderList.forEach(routeBuilder->System.out.println("routeBuilder id=" + routeBuilder.getRouteCollection().getId()));
-
+       camel.addRouteBuilder(new Route2());
+      // camel.addRouteBuilder(new Route());
+LOG.debug("Used Route:" + camel.getRouteBuilders().get(0).getRouteCollection().getDescriptionText());
+        
         try {
         	LOG.debug("camel.getVersion()=" + camel.getVersion() );
             camel.run();
