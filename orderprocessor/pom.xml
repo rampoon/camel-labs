@@ -82,11 +82,11 @@
     		<version>1.1</version>
 		</dependency>
 		
-  <!--      <dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
 			<version>${slf4j-simple-version}</version>
-        </dependency> -->
+        </dependency>
         <!-- test -->
         <dependency>
             <groupId>org.apache.camel</groupId>
