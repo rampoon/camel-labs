@@ -5,10 +5,10 @@ import org.apache.camel.builder.xml.Namespaces;
 
 /**
  * 
- * Splits input message with orders/order structure into separate order files in output
+ * Splits input message with orders/order structure into separate order files in output 
  *
  */
-public class Route3 extends RouteBuilder {
+public class Route4 extends RouteBuilder {
 
     private static final String ROUTE_ID = "OrderProcessorRoute";
 
@@ -22,5 +22,6 @@ public class Route3 extends RouteBuilder {
         .split().tokenizeXML("order","orders").streaming()
         .to("properties:target.uri").id("output")
         .log("Done splitting order message");
+        
     }
 }

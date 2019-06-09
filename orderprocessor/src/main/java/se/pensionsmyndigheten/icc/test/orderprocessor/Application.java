@@ -5,15 +5,19 @@ import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.properties.PropertiesComponent;
+import org.apache.camel.impl.JndiRegistry;
+import org.apache.camel.impl.PropertyPlaceholderDelegateRegistry;
 import org.apache.camel.main.Main;
 import org.apache.camel.model.RouteDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.apache.log4j.Logger;
 
+import se.pensionsmyndigheten.icc.test.orderprocessor.bean.FileNameBean;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route2;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route3;
+import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route4;
 
 public class Application {
 
@@ -30,14 +34,10 @@ public class Application {
         Main camel = new Main();
         PropertiesComponent pc = new PropertiesComponent();
         pc.setLocation(location);
-        camel.bind("properties",pc);
-        
-        while(camel.getCamelContexts().iterator().hasNext() ) {
-        	CamelContext camelContext = camel.getCamelContexts().iterator().next();
-        	LOG.debug("camelContext.getName()=" + camelContext.getName());
-        }
+        camel.bind("properties",pc);        
+        camel.bind("filenamebean", new FileNameBean());
 
-       camel.addRouteBuilder(new Route3());
+       camel.addRouteBuilder(new Route4());
       // camel.addRouteBuilder(new Route());
 LOG.debug("Used Route:" + camel.getRouteBuilders().get(0).getRouteCollection().getDescriptionText());
         
