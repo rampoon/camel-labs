@@ -20,8 +20,9 @@ public class Route4 extends RouteBuilder {
         .log("Start splitting order message" + getRouteCollection().getShortName())
         .to("properties:validation.uri").id("validate-input")
         .split().tokenizeXML("order","orders").streaming()
-        .to("properties:target.uri").id("output")
+        .beanRef("databaseutilbean","save")
         .log("Done splitting order message");
         
     }
+    
 }

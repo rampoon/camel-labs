@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.apache.log4j.Logger;
 
+import se.pensionsmyndigheten.icc.test.orderprocessor.bean.DatabaseUtilBean;
 import se.pensionsmyndigheten.icc.test.orderprocessor.bean.FileNameBean;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route2;
@@ -22,24 +23,30 @@ import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route4;
 public class Application {
 
     private static final String DEFAULT_PROPERTIES_LOCATION = "classpath:config/application.properties";
+    private static final String DEFAULT_ROUTE = "Route";
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
     //private static final Logger LOG = Logger.getLogger(Application.class);
 
-    public static void main(String... args){
-        LOG.info("Starting application...");
+    public static void main(String... args) {
+    	String selectedRoute = DEFAULT_ROUTE;
+        LOG.debug("Starting application...");
         String location = System.getProperty("properties.location",DEFAULT_PROPERTIES_LOCATION);
-        LOG.info("Loading properties from: " + location);
+        LOG.debug("Loading properties from: " + location);
+        
+        if(args.length > 0) {
+        	selectedRoute = args[1];
+        }
+        LOG.debug("Selected Route:" + selectedRoute);
         
         Main camel = new Main();
         PropertiesComponent pc = new PropertiesComponent();
         pc.setLocation(location);
         camel.bind("properties",pc);        
         camel.bind("filenamebean", new FileNameBean());
-
-       camel.addRouteBuilder(new Route4());
-      // camel.addRouteBuilder(new Route());
-LOG.debug("Used Route:" + camel.getRouteBuilders().get(0).getRouteCollection().getDescriptionText());
+        camel.bind("databaseutilbean", new DatabaseUtilBean());
+        
+        camel.addRouteBuilder(new Route3());
         
         try {
         	LOG.debug("camel.getVersion()=" + camel.getVersion() );

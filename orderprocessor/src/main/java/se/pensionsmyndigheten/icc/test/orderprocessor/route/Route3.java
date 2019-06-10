@@ -20,7 +20,7 @@ public class Route3 extends RouteBuilder {
         .log("Start splitting order message" + getRouteCollection().getShortName())
         .to("properties:validation.uri").id("validate-input")
         .split().tokenizeXML("order","orders").streaming()
-        .to("properties:target.uri").id("output")
+        .to("properties:target_route3.uri").id("output")
         .log("Done splitting order message");
     }
 }

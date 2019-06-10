@@ -8,4 +8,5 @@ Changes:
 * Changed logging framework to Apache log4j, could not make logging to file to work otherwise
 * Added Route2: Splits input message with orders/order structure into separate order in output
 * Added Route3: Splits input message with orders/order structure into separate order in output and creates separate files for each order
-* Added a FileNameBean which provides unique filenames for the output files, and registred the bean to Camel context
+* Added a FileNameBean which provides unique filenames for the output files, and registred the bean to Camel context. Used in Route3
+* Added a DatabaseUtilBean for inserting order messages in a local database. Used in Route4
