@@ -1,6 +1,7 @@
 package se.pensionsmyndigheten.icc.test.orderprocessor.bean;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,10 +38,13 @@ public class DatabaseUtilBean {
 		
 		System.out.println("DatabaseUtilBean starts");
 		Connection con = DriverManager.getConnection(CONNECTION_URL, JDBC_USERNAME, JDBC_PASSWORD);
-		String sql = "insert into pm_order (id) values (?)";
+		String sql = "insert into pm_order (id,date,productName,quantity) values (?,?,?,?)";
 		
 		ps = con.prepareStatement(sql);
-		ps.setString(1,orderType.getProductName());
+		ps.setLong(1,orderType.getId().longValue());
+		ps.setDate(2, new Date(orderType.getDate().toGregorianCalendar().getTime().getTime()));
+		ps.setString(3,orderType.getProductName());
+		ps.setLong(4,orderType.getQuantity().longValue());
 		ps.executeUpdate();
 		
 		con.close();	
