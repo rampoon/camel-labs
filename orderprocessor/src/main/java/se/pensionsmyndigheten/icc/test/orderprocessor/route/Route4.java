@@ -17,10 +17,13 @@ public class Route4 extends RouteBuilder {
 
         from("properties:source.uri").id("input")
         .routeId(ROUTE_ID)
-        .log("Start splitting order message" + getRouteCollection().getShortName())
+        .log("Start splitting order message")
         .to("properties:validation.uri").id("validate-input")
-        .split().tokenizeXML("order","orders").streaming()
-        .beanRef("databaseutilbean","save")
+      //  .split().tokenizeXML("order","orders").streaming()
+       // .split().tokenizeXML("order").streaming()
+        .bean("marshallbean","unmarshal")
+        .bean("databaseutilbean","save")
+        .to("file:./output") 		
         .log("Done splitting order message");
         
     }

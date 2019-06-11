@@ -10,3 +10,4 @@ Changes:
 * Added Route3: Splits input message with orders/order structure into separate order in output and creates separate files for each order
 * Added a FileNameBean which provides unique filenames for the output files, and registred the bean to Camel context. Used in Route3
 * Added a DatabaseUtilBean for inserting order messages in a local database. Used in Route4
+* Added a MarshallBean used when persisting order messages in table pm_orders in a local database. Used in Route4

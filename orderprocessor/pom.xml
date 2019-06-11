@@ -134,6 +134,27 @@
                 </executions>
             </plugin>
 
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.9.0</version>
+				<executions>
+					<execution>
+						<id>orderpersist-generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<schemaDirectory>src/main/resources/schema</schemaDirectory>
+							<schemaIncludes>
+								<include>orders.xsd</include>
+							</schemaIncludes>
+							<generateDirectory>${project.build.directory}/generated-sources/xjc/order</generateDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
         </plugins>
 
     </build>

@@ -1,6 +1,11 @@
 package se.pensionsmyndigheten.icc.test.orderprocessor;
 
+import java.io.Writer;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
@@ -15,10 +20,12 @@ import org.slf4j.LoggerFactory;
 
 import se.pensionsmyndigheten.icc.test.orderprocessor.bean.DatabaseUtilBean;
 import se.pensionsmyndigheten.icc.test.orderprocessor.bean.FileNameBean;
+import se.pensionsmyndigheten.icc.test.orderprocessor.bean.MarshallBean;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route2;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route3;
 import se.pensionsmyndigheten.icc.test.orderprocessor.route.Route4;
+import se.pensionsmyndigheten.icc.test.order.OrderType;
 
 public class Application {
 
@@ -45,8 +52,9 @@ public class Application {
         camel.bind("properties",pc);        
         camel.bind("filenamebean", new FileNameBean());
         camel.bind("databaseutilbean", new DatabaseUtilBean());
+        camel.bind("marshallbean", new MarshallBean());
         
-        camel.addRouteBuilder(new Route3());
+        camel.addRouteBuilder(new Route4());
         
         try {
         	LOG.debug("camel.getVersion()=" + camel.getVersion() );

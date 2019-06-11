@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+
+import se.pensionsmyndigheten.icc.test.order.OrderType;
+import se.pensionsmyndigheten.icc.test.order.Orders;
 
 /**
  * A first very simple bean for persiting orders from messages in a database
@@ -16,17 +20,27 @@ public class DatabaseUtilBean {
 	private final static String JDBC_USERNAME = "root";
 	private final static String JDBC_PASSWORD = "root";
 	
-	public void save(String order) throws SQLException {
+	public void persist(String order) {
+		 	
+	}
+	
+	/**
+	 * A first version of db-persist method
+	 */
+	public void save(Orders orders) throws SQLException {
 		Statement stmt=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
+		List<OrderType> orderTypeList = orders.getOrder();
+		OrderType orderType = orderTypeList.iterator().next();
+		
 		System.out.println("DatabaseUtilBean starts");
 		Connection con = DriverManager.getConnection(CONNECTION_URL, JDBC_USERNAME, JDBC_PASSWORD);
-		String sql = "insert into order id values ?";
+		String sql = "insert into pm_order (id) values (?)";
 		
 		ps = con.prepareStatement(sql);
-		ps.setString(1,order);
+		ps.setString(1,orderType.getProductName());
 		ps.executeUpdate();
 		
 		con.close();	
