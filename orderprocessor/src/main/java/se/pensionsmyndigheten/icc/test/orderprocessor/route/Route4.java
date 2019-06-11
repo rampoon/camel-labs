@@ -23,7 +23,7 @@ public class Route4 extends RouteBuilder {
        // .split().tokenizeXML("order").streaming()
         .bean("marshallbean","unmarshal")
         .bean("databaseutilbean","save")
-        .to("file:./output") 		
+       // .to("file:./output") 		
         .log("Done splitting order message");
         
     }

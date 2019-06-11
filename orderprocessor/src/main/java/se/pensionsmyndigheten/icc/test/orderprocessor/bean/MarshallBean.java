@@ -22,7 +22,6 @@ public class MarshallBean {
 	private final String contextPathOrder = "se.pensionsmyndigheten.icc.test.order";
 	
 	synchronized public String marshal(Orders orders) throws JAXBException {
-		System.out.println("Start marshal");
 		contextOrder = JAXBContext.newInstance(contextPathOrder);
 		marshallerOrder = contextOrder.createMarshaller();
 		marshallerOrder.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
@@ -30,20 +29,15 @@ public class MarshallBean {
 		
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter( byteArrayOutputStream, StandardCharsets.UTF_8);
-		System.out.println("Before marshal");
 		marshallerOrder.marshal(orders, outputStreamWriter);
-		System.out.println("After marshal");
 		return byteArrayOutputStream.toString();
 	}
 	
 	synchronized public Orders unmarshal(String message) throws JAXBException {
-		System.out.println("Start unMarshal");
 		contextOrder = JAXBContext.newInstance(contextPathOrder);
 		unmarshallerOrder = contextOrder.createUnmarshaller();
 		
-		System.out.println("Before unmarshal message=" + message);
 		Orders orders = (Orders)unmarshallerOrder.unmarshal(new StringReader(message));
-		System.out.println("After unmarshal");
 		return orders;
 	}
 }
