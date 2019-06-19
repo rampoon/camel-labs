@@ -1,6 +1,9 @@
 # Order processor project
 
-## Description
+## Description Usage from Eclipse, 
+* starting launcher "Application"
+* put a file i input folder
+* records are inserted in database:camel_labs, table: pm_order
 
 Changes:
 * In pom.xml: removed dependency to org.jboss.fuse.bom, could not build otherwise
@@ -11,3 +14,4 @@ Changes:
 * Added a FileNameBean which provides unique filenames for the output files, and registred the bean to Camel context. Used in Route3
 * Added a DatabaseUtilBean for inserting order messages in a local database. Used in Route4
 * Added a MarshallBean used when persisting order messages in table pm_orders in a local database. Used in Route4
+* Correction in DatabaseUtilBean, save method
