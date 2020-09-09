@@ -25,12 +25,12 @@
         <assembly.plugin.version>3.1.1</assembly.plugin.version>
         
         <!-- Properties added by Mats -->
-        <camel-version>2.23.2</camel-version>
+        <camel-version>2.25.1</camel-version>
         <camel-test-version>2.24.0</camel-test-version>
         <slf4j-version>1.7.5</slf4j-version>
     	<slf4j-simple-version>1.7.26</slf4j-simple-version>
         <junit-version>4.11</junit-version>
-        <camel-jackson-version>2.24.0</camel-jackson-version>
+        <camel-jackson-version>2.25.1</camel-jackson-version>
     </properties>
 
     <dependencies>
