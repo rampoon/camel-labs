@@ -30,7 +30,7 @@
         <slf4j-version>1.7.5</slf4j-version>
     	<slf4j-simple-version>1.7.26</slf4j-simple-version>
         <junit-version>4.11</junit-version>
-        <camel-jackson-version>2.24.0</camel-jackson-version>
+        <camel-jackson-version>3.17.0</camel-jackson-version>
     </properties>
 
     <dependencies>
